@@ -50,6 +50,8 @@ public class Application {
                 wasSeparator = true;
             } else if (ch == '-') {
                 throw new IllegalArgumentException("음수는 사용할 수 없습니다.");
+            } else if (ch == '.') {
+                throw new IllegalArgumentException("소수는 사용할 수 없습니다.");
             } else if (Character.isDigit(ch)) {
                 value = value * 10 + Integer.parseInt(String.valueOf(ch));
                 wasSeparator = false;
