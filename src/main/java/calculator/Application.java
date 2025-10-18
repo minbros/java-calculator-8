@@ -48,9 +48,13 @@ public class Application {
                 result = result + value;
                 value = 0;
                 wasSeparator = true;
-            } else {
+            } else if (ch == '-') {
+                throw new IllegalArgumentException("음수는 사용할 수 없습니다.");
+            } else if (Character.isDigit(ch)) {
                 value = value * 10 + Integer.parseInt(String.valueOf(ch));
                 wasSeparator = false;
+            } else {
+                throw new IllegalArgumentException("문자열은 양수와 구분자로만 구성되어야 합니다.");
             }
         }
 
