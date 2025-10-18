@@ -37,15 +37,20 @@ public class Application {
     private static int getResult(String input, Set<Character> separators) {
         int value = 0;
         int result = 0;
+        boolean wasSeparator = false;
+
         for (int i = 0; i < input.length(); i++) {
-            Character ch = input.charAt(i);
-            if (i > 0 && separators.contains(input.charAt(i - 1)) && separators.contains(ch)) {
-                throw new IllegalArgumentException("구분자가 두 개 연속으로 사용될 수 없습니다.");
-            } else if (separators.contains(ch)) {
+            char ch = input.charAt(i);
+            if (separators.contains(ch)) {
+                if (wasSeparator) {
+                    throw new IllegalArgumentException("구분자가 두 개 연속으로 사용될 수 없습니다.");
+                }
                 result = result + value;
                 value = 0;
+                wasSeparator = true;
             } else {
                 value = value * 10 + Integer.parseInt(String.valueOf(ch));
+                wasSeparator = false;
             }
         }
 
