@@ -26,7 +26,7 @@ public class Application {
                 separators.add(separator);
                 input = input.substring(5);
             } else {
-                throw new IllegalArgumentException("커스텀 구분자 정의가 잘못됨");
+                throw new IllegalArgumentException("커스텀 구분자 정의가 잘못되었습니다.");
             }
         }
 
