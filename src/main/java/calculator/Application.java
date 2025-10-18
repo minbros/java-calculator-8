@@ -15,7 +15,6 @@ public class Application {
             return;
         }
 
-        int result = 0;
         if (!Character.isDigit(input.charAt(input.length() - 1))) {
             throw new IllegalArgumentException("문자열은 숫자로 끝나야 합니다.");
         }
@@ -31,10 +30,18 @@ public class Application {
             }
         }
 
+        int result = getResult(input, separators);
+        System.out.printf("결과 : %d%n", result);
+    }
+
+    private static int getResult(String input, Set<Character> separators) {
         int value = 0;
+        int result = 0;
         for (int i = 0; i < input.length(); i++) {
             Character ch = input.charAt(i);
-            if (separators.contains(ch)) {
+            if (i > 0 && separators.contains(input.charAt(i - 1)) && separators.contains(ch)) {
+                throw new IllegalArgumentException("구분자가 두 개 연속으로 사용될 수 없습니다.");
+            } else if (separators.contains(ch)) {
                 result = result + value;
                 value = 0;
             } else {
@@ -42,7 +49,6 @@ public class Application {
             }
         }
 
-        result = result + value;
-        System.out.printf("결과 : %d%n", result);
+        return result + value;
     }
 }
